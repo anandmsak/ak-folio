@@ -1,0 +1,51 @@
+export const certifications = [
+  {
+    title: "AI for Sustainability Virtual Internship",
+    org: "1MIB / AICTE",
+    year: "2025",
+    skills: ["Agentic AI", "RAG Systems", "Responsible AI"],
+    link: "#",
+  },
+  {
+    title: "AICTE Skills4Future Internship",
+    org: "AICTE",
+    year: "2025",
+    skills: ["AI", "Data Analytics", "Green Technology"],
+    link: "#",
+  },
+  {
+    title: "Embedded Systems for Beginners",
+    org: "NIELIT",
+    year: "2024",
+    skills: ["Embedded C", "Microcontrollers", "Hardware Basics"],
+    link: "#",
+  },
+  {
+    title: "IoT & Embedded Systems Workshop",
+    org: "Mahendra Engineering College",
+    year: "2024",
+    skills: ["IoT", "ESP32", "Sensor Interfacing"],
+    link: "#",
+  },
+  {
+    title: "GENAI and XAI Workshop",
+    org: "Karpagam College of Engineering",
+    year: "2025",
+    skills: ["Generative AI", "Explainable AI"],
+    link: "#",
+  },
+  {
+    title: "Deloitte Job Simulation",
+    org: "Deloitte / Forage",
+    year: "2025",
+    skills: ["Cyber Security", "Technology Consulting"],
+    link: "#",
+  },
+  {
+    title: "Encoder Decoder Architecture",
+    org: "Simplilearn",
+    year: "2025",
+    skills: ["Deep Learning", "Neural Networks"],
+    link: "#",
+  },
+];
