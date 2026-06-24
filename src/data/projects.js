@@ -1,3 +1,21 @@
+import s2cMainImg from "../assets/images/s2c_img1.png";
+import s2c_img from "../assets/images/s2c_img.png";
+import s2c_img2 from "../assets/images/s2c_img2.png";
+import s2c_img3 from "../assets/images/s2c_img3.png";
+import s2c_img4 from "../assets/images/s2c_img4.png";
+import s2c_img5 from "../assets/images/s2c_img5.png";
+import s2c_img6 from "../assets/images/s2c_img6.jpg";
+import r2vMainImg from "../assets/images/r2v_img.png";
+import prismMainImg from "../assets/images/prism_img1.jpg";
+import prism_img2 from "../assets/images/prism_img2.jpg";
+import prism_img3 from "../assets/images/prism_img3.png";
+import prism_img4 from "../assets/images/prism_img4.png";
+import smartEyeMainImg from "../assets/images/smart_eye_img2.jpg";
+import smartEye2 from "../assets/images/smart_eye_img.png";
+import smartWasteMainImg from "../assets/images/smart_waste_img1.jpg";
+import air_img1 from "../assets/images/air_quality_prediction_img1.png";
+import air_Main from "../assets/images/air_quality_prediction_img.png";
+
 export const projects = [
   {
     title: "Activity-Aware Low Switching Neural MAC Architecture",
@@ -6,44 +24,12 @@ export const projects = [
     solution: "Designed a power-efficient MAC architecture using activity-aware input detection to reduce unnecessary switching operations and improve energy efficiency.",
     technologies: ["Verilog", "RTL Design", "FPGA", "Computer Architecture"],
     stack: "Vivado · ModelSim · FPGA Prototype",
+    status: "IN_PROGRESS",
     impact: "Exploring energy-efficient hardware architectures for future AI accelerator applications.",
     github: "#",
     demo: null,
   },
-  {
-    title: "S2C — Sketch-to-Circuit AI System",
-    category: "AI + Computer Vision + Electronics",
-    problem: "Students struggle to understand how circuit simulators solve circuits internally — the process is a black box.",
-    solution: "An AI-based educational system that converts hand-drawn circuit sketches into digital netlists, solves them using Modified Nodal Analysis, and explains every step.",
-    technologies: ["Python", "YOLOv8", "OpenCV", "NumPy", "NetworkX", "Streamlit"],
-    stack: "Web Application + AI Pipeline",
-    impact: "Trained on 1,200+ images; detects 6 component types; solves DC circuits in under 10 seconds with full KCL/KVL explainability.",
-    github: "https://github.com/anandmsak/S2C_VF",
-    demo: null,
-  },
-  {
-    title: "R2V — Right To Vote",
-    category: "Secure Digital Systems",
-    problem: "Traditional institutional voting lacks transparency, security, and auditability.",
-    solution: "A secure digital election platform with hash-chained audit logs, JWT authentication, anonymous voting, and tamper-evident records.",
-    technologies: ["React", "FastAPI", "PostgreSQL", "JWT", "Security Architecture"],
-    stack: "Full-Stack Web Application",
-    impact: "Dual portals (Student/Admin), register-number voter validation, real-time election management for college-level deployment.",
-    github: "https://github.com/anandmsak/r2v/tree/a2",
-    demo: null,
-  },
-  {
-    title: "PRISM SAFE 2.0",
-    category: "AIoT + Public Safety",
-    problem: "Existing crowd monitoring systems detect problems after they occur instead of predicting risks before a crisis develops.",
-    solution: "AI-based crowd analysis system using ESP32-CAM nodes and PIR/IR sensor arrays to predict congestion and danger conditions in real time.",
-    technologies: ["Python", "OpenCV", "Flask", "ESP32-CAM", "MQTT", "Node-RED"],
-    stack: "Embedded Hardware + AI Cloud Pipeline",
-    impact: "Presented at Medha'26 National Hackathon. Supports up to 16 sensor zones with multi-level alert escalation.",
-    github: "https://github.com/anandmsak/PS_2.0",
-    demo: null,
-  },
-  {
+    {
     title: "Smart Eye",
     category: "Embedded IoT System",
     problem: "Real-time crowd density tracking at public venues requires low-cost, scalable hardware solutions.",
@@ -52,6 +38,9 @@ export const projects = [
     stack: "Embedded Hardware Prototype",
     impact: "First Prize — Mahendra Engineering College Project Expo.",
     github: "#",
+    image: smartEyeMainImg,
+    youtubeId: "bNni3NOueuM",
+    images: [smartEyeMainImg, smartEye2],
     demo: null,
   },
   {
@@ -63,8 +52,49 @@ export const projects = [
     stack: "Embedded Hardware + AI Prototype",
     impact: "Selected for Smart India Hackathon 2025 (college level). Second Prize — Kongu Engineering College.",
     github: "https://github.com/anandmsak/SIH_25014_Project",
+    image: smartWasteMainImg,
+    youtubeId: "HxeRsRr5srI",
     demo: null,
   },
+  {
+    title: "S2C — Sketch-to-Circuit AI System",
+    category: "AI + Computer Vision + Electronics",
+    problem: "Students struggle to understand how circuit simulators solve circuits internally — the process is a black box.",
+    solution: "An AI-based educational system that converts hand-drawn circuit sketches into digital netlists, solves them using Modified Nodal Analysis, and explains every step.",
+    technologies: ["Python", "YOLOv8", "OpenCV", "NumPy", "NetworkX", "Streamlit"],
+    stack: "Web Application + AI Pipeline",
+    impact: "Trained on 1,200+ images; detects 6 component types; solves DC circuits in under 10 seconds with full KCL/KVL explainability.",
+    github: "https://github.com/anandmsak/S2C_VF",
+    image: s2cMainImg,
+    images: [s2c_img3, s2c_img4,s2c_img, s2c_img2, s2c_img5,s2c_img6 ],
+    demo: null,
+  },
+  {
+    title: "PRISM SAFE 2.0",
+    category: "AIoT + Public Safety",
+    problem: "Existing crowd monitoring systems detect problems after they occur instead of predicting risks before a crisis develops.",
+    solution: "AI-based crowd analysis system using ESP32-CAM nodes and PIR/IR sensor arrays to predict congestion and danger conditions in real time.",
+    technologies: ["Python", "OpenCV", "Flask", "ESP32-CAM", "MQTT", "Node-RED"],
+    stack: "Embedded Hardware + AI Cloud Pipeline",
+    impact: "Presented at Medha'26 National Hackathon. Supports up to 16 sensor zones with multi-level alert escalation.",
+    github: "https://github.com/anandmsak/PS_2.0",
+    image: prismMainImg,
+    images: [prismMainImg ,prism_img2, prism_img3,prism_img4],
+    demo: null,
+  },
+   {
+    title: "R2V — Right To Vote",
+    category: "Secure Digital Systems",
+    problem: "Traditional institutional voting lacks transparency, security, and auditability.",
+    solution: "A secure digital election platform with hash-chained audit logs, JWT authentication, anonymous voting, and tamper-evident records.",
+    technologies: ["React", "FastAPI", "PostgreSQL", "JWT", "Security Architecture"],
+    stack: "Full-Stack Web Application",
+    impact: "Dual portals (Student/Admin), register-number voter validation, real-time election management for college-level deployment.",
+    github: "https://github.com/anandmsak/r2v/tree/a2",
+    image: r2vMainImg,
+    demo: null,
+  },
+
   {
     title: "Environmental Monitoring & Pollution Prediction System",
     category: "AI / Machine Learning",
@@ -74,6 +104,8 @@ export const projects = [
     stack: "Python ML Pipeline",
     impact: "Features data analysis, regression-based prediction, and pollution visualization.",
     github: "#",
+    image: air_Main,
+    images: [air_Main,air_img1],
     demo: null,
   },
 ];
