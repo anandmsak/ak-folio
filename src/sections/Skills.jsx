@@ -1,15 +1,15 @@
+// components/Skills.jsx
 import { skills } from "../data/skills";
 import Reveal from "../components/animations/Reveal";
-import GlassCard from "../components/ui/GlassCard";
 import SectionTitle from "../components/ui/SectionTitle";
 import { motion } from "framer-motion";
 
 const iconMap = {
-  chip:  "◈",
-  cpu:   "◉",
-  brain: "◆",
-  code:  "◇",
-  tools: "◎",
+  verification: "◈",
+  chip:         "🔶",
+  cpu:          "📦",
+  code:         "⚡",
+  tools:        "⚙️",
 };
 
 export default function Skills() {
@@ -25,9 +25,10 @@ export default function Skills() {
       <SectionTitle
         label="Expertise"
         title="Technical Arsenal"
-        subtitle="Core competencies across hardware design, embedded systems, AI development, and engineering tools."
+        subtitle="Pre-silicon validation matrices, architectural checking competencies, and industry-standard EDA simulation toolsets."
       />
 
+      {/* Primary 5-Column High-Density Verification Grid */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {skills.map((skill, i) => (
           <Reveal key={skill.category} delay={i * 0.08}>
@@ -37,28 +38,28 @@ export default function Skills() {
                 boxShadow: `0 20px 50px ${skill.color}12, 0 0 1px ${skill.color}30`,
               }}
               transition={{ type: "spring", stiffness: 280, damping: 24 }}
-              className="h-full rounded-2xl p-5 transition-all duration-300"
+              className="h-full rounded-2xl p-5 transition-all duration-300 bg-card"
               style={{
                 background: "rgba(255,255,255,0.035)",
-                border: `1px solid rgba(255,255,255,0.08)`,
+                border: "1px solid rgba(255,255,255,0.08)",
                 backdropFilter: "blur(12px)",
               }}
             >
-              {/* Header */}
+              {/* Category Header Area */}
               <div className="flex items-center gap-2.5 mb-5">
-                <span style={{ color: skill.color, fontSize: "18px", lineHeight: 1 }}>
+                <span style={{ color: skill.color, fontSize: "16px", lineHeight: 1 }}>
                   {iconMap[skill.icon] || "◈"}
                 </span>
                 <h3
-                  className="font-mono font-bold tracking-wide text-[11px] leading-tight"
-                  style={{ color: skill.color }}
+                  className="font-bold tracking-wide text-[13px] uppercase"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif", color: skill.color }}
                 >
                   {skill.category}
                 </h3>
               </div>
 
-              {/* Skill list */}
-              <div className="flex flex-col gap-1.5">
+              {/* Technical Capability String Listing */}
+              <div className="flex flex-col gap-2">
                 {skill.items.map((item) => (
                   <div
                     key={item}
@@ -66,10 +67,15 @@ export default function Skills() {
                   >
                     <span
                       className="w-1 h-1 rounded-full flex-shrink-0 transition-all duration-300 group-hover:scale-125"
-                      style={{ background: skill.color, opacity: 0.5 }}
+                      style={{ background: skill.color, opacity: 0.6 }}
                     />
                     <span
-                      className="font-mono text-[11px] text-gray-400 group-hover:text-gray-200 transition-colors duration-200"
+                      className="text-[12px] text-gray-400 group-hover:text-white transition-colors duration-200"
+                      style={{ 
+                        fontFamily: item.match(/(UVM|HVL|HDL|OOP|SVA|RTL|APB|AHB|AXI|EDA|FSM|CDC)/) 
+                          ? "'JetBrains Mono', monospace" 
+                          : "'Inter', sans-serif" 
+                      }}
                     >
                       {item}
                     </span>
@@ -77,11 +83,11 @@ export default function Skills() {
                 ))}
               </div>
 
-              {/* Bottom accent */}
+              {/* Functional Semantic Ribbon Accent */}
               <div
                 className="mt-5 h-px w-full rounded"
                 style={{
-                  background: `linear-gradient(to right, ${skill.color}30, transparent)`,
+                  background: `linear-gradient(to right, ${skill.color}40, transparent)`,
                 }}
               />
             </motion.div>
@@ -89,7 +95,7 @@ export default function Skills() {
         ))}
       </div>
 
-      {/* Tools ribbon */}
+      {/* Downscaled Adjacent Domains Ribbon Layer */}
       <Reveal delay={0.45}>
         <div
           className="mt-8 rounded-2xl p-5 flex flex-wrap gap-2.5 items-center"
@@ -98,22 +104,23 @@ export default function Skills() {
             border: "1px solid rgba(255,255,255,0.07)",
           }}
         >
-          <span className="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase mr-2">
-            // Dev Environment
+          <span 
+            className="text-[10px] text-gray-600 tracking-[0.3em] uppercase mr-2"
+            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+          >
+            // ADJACENT DOMAINS (CO-DESIGN & ARCHITECTURE)
           </span>
           {[
-            "Xilinx Vivado", "ModelSim", "MATLAB", "LTSpice",
-            "VS Code", "Git", "Node-RED", "Arduino IDE",
-            "Jupyter", "Streamlit",
-          ].map((tool) => (
-            <motion.span
-              key={tool}
-              whileHover={{ borderColor: "rgba(0,245,255,0.4)", color: "#00f5ff" }}
-              className="text-[11px] px-3 py-1.5 rounded-full border border-white/8 text-gray-500 font-mono transition-colors duration-300 cursor-default"
-              style={{ background: "rgba(255,255,255,0.02)" }}
+            "Edge AI Accelerators", "Python Machine Learning", "Neural Network Mapping", 
+            "OpenCV Computer Vision", "Sensors & Telemetry Arrays", "Circuit Automation Models"
+          ].map((domain) => (
+            <span
+              key={domain}
+              className="text-[12px] px-3 py-1.5 rounded-full border border-white/5 text-gray-500 transition-colors duration-300 cursor-default"
+              style={{ fontFamily: "'Inter', sans-serif", background: "rgba(255,255,255,0.01)" }}
             >
-              {tool}
-            </motion.span>
+              {domain}
+            </span>
           ))}
         </div>
       </Reveal>

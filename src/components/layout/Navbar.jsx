@@ -41,15 +41,15 @@ export default function Navbar() {
           <span className="w-2 h-2 rounded-full bg-cyan-400 pulse-glow" />
           <span
             className="text-[13px] font-bold tracking-[0.18em] text-cyan-400"
-            style={{ fontFamily: "var(--font-mono)" }}
+            style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
             ANANDHA KRISHNAN
           </span>
           <span
             className="text-[13px] font-bold tracking-[0.18em] text-white/40"
-            style={{ fontFamily: "var(--font-mono)" }}
+            style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
-            // SILICON LAB
+            // DV ENGINEERING LAB
           </span>
         </a>
 
@@ -59,7 +59,7 @@ export default function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              style={{ fontFamily: "var(--font-mono)" }}
+              style={{ fontFamily: "'JetBrains Mono', monospace" }}
               className="
                 text-[11px] tracking-[0.12em] text-gray-400 uppercase
                 px-3 py-[6px] border border-white/12 rounded-[4px]
@@ -71,10 +71,10 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* HIRE ME — accent control button */}
+          {/* Core Action — structural validation link */}
           <a
-            href="#contact"
-            style={{ fontFamily: "var(--font-mono)", marginLeft: "4px" }}
+            href="#projects"
+            style={{ fontFamily: "'JetBrains Mono', monospace", marginLeft: "4px" }}
             className="
               text-[11px] tracking-[0.15em] font-semibold uppercase
               px-4 py-[6px] rounded-[4px]
@@ -83,7 +83,7 @@ export default function Navbar() {
               transition-all duration-200
             "
           >
-            HIRE ME
+            VIEW VERIFICATION WORK
           </a>
         </div>
 
@@ -111,19 +111,19 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              style={{ fontFamily: "var(--font-mono)" }}
+              style={{ fontFamily: "'JetBrains Mono', monospace" }}
               className="block py-3 text-sm text-gray-300 hover:text-cyan-400 tracking-wide border-b border-white/10 last:border-0 transition-colors uppercase"
             >
               {link.name}
             </a>
           ))}
           <a
-            href="#contact"
+            href="#projects"
             onClick={() => setMenuOpen(false)}
-            style={{ fontFamily: "var(--font-mono)" }}
+            style={{ fontFamily: "'JetBrains Mono', monospace" }}
             className="block mt-3 py-2 text-center text-sm font-semibold text-cyan-400 border border-cyan-400/40 rounded-lg hover:bg-cyan-400/10 transition-all uppercase tracking-widest"
           >
-            HIRE ME
+            VIEW VERIFICATION WORK
           </a>
         </motion.div>
       )}

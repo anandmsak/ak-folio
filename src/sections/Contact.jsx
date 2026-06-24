@@ -1,3 +1,4 @@
+// sections/Contact.jsx
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Reveal from "../components/animations/Reveal";
@@ -28,12 +29,7 @@ function ClockTrace() {
         </filter>
       </defs>
       {/* Static dim trace rail */}
-      <path
-        d="M0,40 H900"
-        stroke="#1e293b"
-        strokeWidth="1"
-        fill="none"
-      />
+      <path d="M0,40 H900" stroke="#1e293b" strokeWidth="1" fill="none" />
       {/* Clock waveform — square wave pattern */}
       <motion.path
         d="M0,40 H40 V12 H120 V40 H200 V12 H280 V40 H360 V12 H440 V40 H520 V12 H600 V40 H680 V12 H760 V40 H840 V12 H900"
@@ -64,8 +60,19 @@ function ClockTrace() {
   );
 }
 
-/* ── Individual channel row ── */
+/* ── Individual channel row with built-in clipboard injection routines ── */
 function ChannelRow({ channel, index }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleAction = (e) => {
+    if (channel.icon === "email") {
+      e.preventDefault();
+      navigator.clipboard.writeText(channel.val);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   const icons = {
     email: (
       <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={1.5}>
@@ -93,63 +100,46 @@ function ChannelRow({ channel, index }) {
     >
       <a
         href={channel.route}
-        target="_blank"
+        target={channel.icon !== "email" ? "_blank" : undefined}
         rel="noopener noreferrer"
+        onClick={handleAction}
         className="group flex items-center justify-between gap-4 px-5 py-4 rounded-xl border transition-all duration-250 relative overflow-hidden"
         style={{
           background: "rgba(7,11,25,0.6)",
           borderColor: "rgba(255,255,255,0.04)",
         }}
       >
-        {/* Hover fill sweep */}
         <motion.div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-          style={{
-            background: `linear-gradient(90deg, ${channel.color}08 0%, ${channel.color}03 100%)`,
-          }}
+          style={{ background: `linear-gradient(90deg, ${channel.color}08 0%, ${channel.color}03 100%)` }}
         />
-        {/* Left: index + icon + label */}
         <div className="flex items-center gap-3 min-w-0">
-          <span
-            className="font-mono text-[9px] tabular-nums shrink-0"
-            style={{ color: `${channel.color}60` }}
-          >
+          <span className="font-mono text-[9px] tabular-nums shrink-0" style={{ fontFamily: "'JetBrains Mono', monospace", color: `${channel.color}60` }}>
             [{String(index).padStart(2, "0")}]
           </span>
-          <span
-            className="shrink-0 transition-transform duration-200 group-hover:scale-110"
-            style={{ color: channel.color }}
-          >
+          <span className="shrink-0 transition-transform duration-200 group-hover:scale-110" style={{ color: channel.color }}>
             {icons[channel.icon]}
           </span>
-          <div className="min-w-0">
-            <div
-              className="font-mono text-[9px] tracking-widest uppercase mb-0.5 transition-colors duration-200"
-              style={{ color: `${channel.color}70` }}
-            >
+          <div className="min-w-0 text-left">
+            <div className="font-mono text-[9px] tracking-widest uppercase mb-0.5" style={{ fontFamily: "'JetBrains Mono', monospace", color: `${channel.color}70` }}>
               {channel.label}
             </div>
-            <div
-              className="font-mono text-xs font-semibold truncate transition-colors duration-200 group-hover:underline underline-offset-2"
-              style={{ color: channel.color }}
-            >
+            <div className="font-mono text-xs font-semibold truncate group-hover:underline underline-offset-2" style={{ fontFamily: "'JetBrains Mono', monospace", color: channel.color }}>
               {channel.val}
             </div>
           </div>
         </div>
 
-        {/* Right: protocol tag + arrow */}
         <div className="flex items-center gap-3 shrink-0">
-          <span
-            className="hidden sm:block font-mono text-[8px] px-2 py-0.5 rounded border tracking-widest"
-            style={{
-              borderColor: `${channel.color}25`,
-              color: `${channel.color}50`,
-              background: `${channel.color}08`,
-            }}
-          >
-            {channel.proto}
-          </span>
+          {copied ? (
+            <span className="font-mono text-[8px] px-2 py-0.5 rounded border border-green-500/30 text-green-400 bg-green-500/10 tracking-widest" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              COPIED_OK
+            </span>
+          ) : (
+            <span className="hidden sm:block font-mono text-[8px] px-2 py-0.5 rounded border tracking-widest" style={{ fontFamily: "'JetBrains Mono', monospace", borderColor: `${channel.color}25`, color: `${channel.color}50`, background: `${channel.color}08` }}>
+              {channel.proto}
+            </span>
+          )}
           <motion.span
             className="text-gray-600 group-hover:text-white transition-colors duration-200"
             animate={{ x: [0, 2, 0] }}
@@ -174,7 +164,7 @@ function HandshakeStrip() {
   ];
 
   return (
-    <div className="flex items-center gap-2 font-mono text-[9px]">
+    <div className="flex items-center gap-2 font-mono text-[9px]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
       {steps.map((s, i) => (
         <div key={i} className="flex items-center gap-2">
           <div className={`flex items-center gap-1.5 ${s.done ? "text-emerald-400/70" : "text-cyan-400/50"}`}>
@@ -185,9 +175,7 @@ function HandshakeStrip() {
             />
             <span className="tracking-widest">{s.label}</span>
           </div>
-          {i < steps.length - 1 && (
-            <span className="text-gray-700">──</span>
-          )}
+          {i < steps.length - 1 && <span className="text-gray-700">──</span>}
         </div>
       ))}
     </div>
@@ -198,7 +186,7 @@ function HandshakeStrip() {
 export default function Contact() {
   const connectionChannels = [
     {
-      label: "Primary Comms",
+      label: "Primary Comms (Click to Copy)",
       val: "anandhperumal27@gmail.com",
       route: "mailto:anandhperumal27@gmail.com",
       color: "#00c8ff",
@@ -230,8 +218,8 @@ export default function Contact() {
     >
       <SectionTitle
         label="CONTACT"
-        title="Let's Build Something"
-        subtitle="Open to VLSI internships, verification roles, and research collaborations. Reach out through any channel below."
+        title="Establish Connection Link"
+        subtitle="Open to VLSI design verification engineering roles, pre-silicon validation internships, and architectural research collaborations."
       />
 
       <Reveal direction="fade" className="w-full flex justify-center mt-4">
@@ -243,58 +231,56 @@ export default function Contact() {
             boxShadow: "0 0 60px rgba(0,200,255,0.05), 0 24px 48px rgba(0,0,0,0.6)",
           }}
         >
-          {/* Corner accent marks — circuit board aesthetic */}
+          {/* Corner accent marks */}
           {[
             "top-0 left-0 border-t border-l rounded-tl-2xl",
             "top-0 right-0 border-t border-r rounded-tr-2xl",
             "bottom-0 left-0 border-b border-l rounded-bl-2xl",
             "bottom-0 right-0 border-b border-r rounded-br-2xl",
           ].map((cls, i) => (
-            <span
-              key={i}
-              className={`absolute w-4 h-4 ${cls}`}
-              style={{ borderColor: "rgba(0,200,255,0.25)" }}
-            />
+            <span key={i} className={`absolute w-4 h-4 ${cls}`} style={{ borderColor: "rgba(0,200,255,0.25)" }} />
           ))}
 
           {/* Clock trace header */}
           <div className="px-6 pt-5 pb-0">
-            <div className="flex items-center justify-between mb-2 font-mono text-[9px] text-gray-600">
-              <span className="tracking-widest">CLK_SIGNAL // 100MHz</span>
+            <div className="flex items-center justify-between mb-2 font-mono text-[9px] text-gray-600" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              <span>CLK_SIGNAL // 100MHz</span>
               <span style={{ color: "rgba(0,200,255,0.4)" }}>LINK_ACTIVE</span>
             </div>
             <ClockTrace />
           </div>
 
           {/* Identity header */}
-          <div className="px-6 pt-4 pb-5 border-b" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
+          <div className="px-6 pt-4 pb-5 border-b text-left" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
             <div className="flex items-start justify-between gap-4">
-              <div className="text-left">
-                <div className="font-mono text-[9px] tracking-widest mb-1.5" style={{ color: "rgba(0,200,255,0.5)" }}>
+              <div>
+                <div className="font-mono text-[9px] tracking-widest mb-1.5" style={{ fontFamily: "'JetBrains Mono', monospace", color: "rgba(0,200,255,0.5)" }}>
                   MODULE: engineer_contact_v1
                 </div>
-                <h3 className="text-white font-semibold text-lg leading-tight">
-                  Anandha Krishnan
+                <h3 className="text-white font-bold text-lg leading-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  Anandha Krishnan P
                 </h3>
-                <p className="font-mono text-xs mt-0.5" style={{ color: "rgba(148,163,184,0.7)" }}>
-                  VLSI Design · RTL Verification · FPGA Systems
+                <p className="font-mono text-xs mt-0.5 font-bold text-cyan-400" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  Design Verification Engineer — SV · UVM · SVA
                 </p>
               </div>
-              {/* Verification badge */}
+              
+              {/* Refactored High-Impact Target Internship Availability Badge */}
               <div
-                className="shrink-0 flex flex-col items-center gap-1 px-3 py-2 rounded-lg border font-mono text-[8px] tracking-widest"
+                className="shrink-0 flex flex-col items-center gap-1 px-3 py-2 rounded-lg border font-mono text-[8px] tracking-widest text-center font-bold"
                 style={{
-                  borderColor: "rgba(16,185,129,0.2)",
-                  background: "rgba(16,185,129,0.05)",
-                  color: "rgba(16,185,129,0.6)",
+                  borderColor: "rgba(16,185,129,0.3)",
+                  background: "rgba(16,185,129,0.06)",
+                  color: "#10b981",
+                  fontFamily: "'JetBrains Mono', monospace"
                 }}
               >
                 <motion.div
-                  className="w-2 h-2 rounded-full bg-emerald-400"
+                  className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#10b981]"
                   animate={{ opacity: [0.4, 1, 0.4] }}
                   transition={{ duration: 1.4, repeat: Infinity }}
                 />
-                AVAILABLE
+                DV_INTERNSHIP_AVAILABLE
               </div>
             </div>
           </div>
@@ -307,16 +293,10 @@ export default function Contact() {
           </div>
 
           {/* Footer handshake strip */}
-          <div
-            className="px-6 py-3.5 flex flex-wrap items-center justify-between gap-3 border-t"
-            style={{ borderColor: "rgba(255,255,255,0.04)" }}
-          >
+          <div className="px-6 py-3.5 flex flex-wrap items-center justify-between gap-3 border-t" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
             <HandshakeStrip />
-            <span
-              className="font-mono text-[8px] tracking-widest"
-              style={{ color: "rgba(124,58,237,0.5)" }}
-            >
-              RTL_TESTBENCH :: READY
+            <span className="font-mono text-[8px] tracking-widest font-bold text-green-400" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              RTL_TESTBENCH :: SIM_READY_PASS
             </span>
           </div>
         </div>

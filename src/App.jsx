@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"; // Added React hooks for global overlay sync
+// src/App.jsx
+import { useState, useEffect } from "react"; 
 import CursorTrail from "./components/ui/CursorTrail";
 import ParticleField from "./components/ui/ParticleField";
 import PCBBackground from "./components/ui/PCBBackground";
@@ -10,11 +11,10 @@ import Skills from "./sections/Skills";
 import Projects from "./sections/Projects";
 import Research from "./sections/Research";
 import Achievements from "./sections/Achievements";
-
-// ── IMPORT YOUR FINAL PHASE 4 SECTIONS SEAMLESSLY
+import VerificationMethodology from "./components/VerificationMethodology";
 import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
-import ImageModal from "./components/ui/ImageModal"; // Centralizing image zoom modal at root context
+import ImageModal from "./components/ui/ImageModal"; 
 
 function SectionDivider() {
   return (
@@ -30,10 +30,8 @@ function SectionDivider() {
 }
 
 function App() {
-  // ── CORE GLOBAL LIGHTBOX STORAGE HOOK ──
   const [activeZoomImage, setActiveZoomImage] = useState(null);
 
-  // Keyboard Event Listener Matrix: Handles Arrow Keys for multi-frame switching globally
   useEffect(() => {
     if (!activeZoomImage || !activeZoomImage.images || activeZoomImage.images.length <= 1) return;
 
@@ -54,7 +52,6 @@ function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeZoomImage]);
 
-  // Mobile Device Touch Swipe Vector Translators
   const [touchStart, setTouchStart] = useState(0);
   const minSwipeDistance = 50;
 
@@ -69,11 +66,9 @@ function App() {
     const { images, index, alt } = activeZoomImage;
 
     if (distance > minSwipeDistance) {
-      // Swipe Left Trigger -> Show Next Image
       const nextIdx = (index + 1) % images.length;
       setActiveZoomImage({ src: images[nextIdx], alt, images, index: nextIdx });
     } else if (distance < -minSwipeDistance) {
-      // Swipe Right Trigger -> Show Previous Image
       const prevIdx = (index - 1 + images.length) % images.length;
       setActiveZoomImage({ src: images[prevIdx], alt, images, index: prevIdx });
     }
@@ -94,18 +89,17 @@ function App() {
         <SectionDivider />
         <Skills />
         <SectionDivider />
+        <VerificationMethodology />
+        <SectionDivider />
         
-        {/* Pass down the central state manager down into your projects archive component block */}
+        {/* Synchronized Shared Storage Context Props */}
         <Projects activeZoomImage={activeZoomImage} setActiveZoomImage={setActiveZoomImage} />
         
         <SectionDivider />
         <Research />
         <SectionDivider />
         <Achievements />
-        
-        {/* ── PHASE 4 PORT PORTALS INJECTION ── */}
         <SectionDivider />
-        {/* Pass down the central zoom state manager to unleash full screen horizontal credential overlays */}
         <Certifications setActiveZoomImage={setActiveZoomImage} />
         
         <SectionDivider />
@@ -114,12 +108,13 @@ function App() {
 
       <Footer />
 
-      {/* ── CENTRAL GLOBAL APPLICATION LEVEL VIEWPORT MATRIX ── */}
+      {/* GLOBAL APPLICATION LEVEL HIGHEST PRIORITY OVERLAY */}
       {activeZoomImage && (
         <div 
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className="relative"
+          className="fixed inset-0"
+          style={{ zIndex: 999999 }} // Explicit override over details portal context layers
         >
           <ImageModal 
             src={activeZoomImage.src} 
